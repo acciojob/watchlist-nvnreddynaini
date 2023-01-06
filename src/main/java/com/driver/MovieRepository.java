@@ -23,12 +23,28 @@ public class MovieRepository {
 
     public void addMovieDirectorPairFromDb(String movie,String director){
         if(MovieDb.containsKey(movie) && DirectorDb.containsKey(director)){
-            List<String> MoviesOfDirector = new ArrayList<>();
-            if(MovieDirectorDb.containsKey(director))
-                MoviesOfDirector = MovieDirectorDb.get(director);
-            MoviesOfDirector.add(movie);
-            MovieDirectorDb.put(director,MoviesOfDirector);
+            List<String> moviesOfDirector;
+            if(MovieDirectorDb.containsKey(director)) {
+                moviesOfDirector = MovieDirectorDb.get(director);
+            }else {
+                moviesOfDirector = new ArrayList<>();
+            }
+            moviesOfDirector.add(movie);
+            MovieDirectorDb.put(director,moviesOfDirector);
         }
+    }
+
+    public String getDirectorNameByMovieNameFromDb(String movieName){
+        if(MovieDb.containsKey(movieName)){
+            for(String director: MovieDirectorDb.keySet()){
+                for(String movie: MovieDirectorDb.get(director)){
+                    if(movieName.equals(movie)){
+                        return director;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public Movie getMovieByNameFromDb(String movie){

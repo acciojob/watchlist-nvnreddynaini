@@ -23,6 +23,10 @@ public class MovieService {
         movieRepository.addMovieDirectorPairFromDb(movie,director);
     }
 
+    public String getDirectorNameByMovieName(String movieName){
+        return movieRepository.getDirectorNameByMovieNameFromDb(movieName);
+    }
+
     public Movie getMovieByName(String movieName){
         return movieRepository.getMovieByNameFromDb(movieName);
     }
